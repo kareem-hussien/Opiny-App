@@ -1,0 +1,46 @@
+name: opiny_app
+description: "A Opiny Application."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  page_transition: ^2.2.1
+  flutter_screenutil: ^5.9.3
+  flutter_svg: ^2.0.17
+  fluttertoast: ^8.2.10
+  google_fonts: ^6.2.1
+  iconsax: ^0.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+flutter:
+
+  uses-material-design: true
+
+  # assets:
+  assets:
+    - assets/images/pngs/
+    - assets/images/svgs/
+    - assets/images/jpgs/
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
