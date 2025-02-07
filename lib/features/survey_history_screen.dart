@@ -7,6 +7,36 @@ class SurveyHistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<SurveyModel> surveyList = [
+      SurveyModel(
+        title: 'Netflix Survey',
+        status: 'Completed',
+        date: 'March 15, 2025',
+        coins: '+2450',
+        isCompleted: true,
+        statusColor: const Color(0xFF059669),
+        statusBgColor: const Color(0xFFECFDF5),
+      ),
+      SurveyModel(
+        title: 'Food Delivery App Survey',
+        status: 'Pending Review',
+        date: 'March 10, 2025',
+        coins: '+400',
+        isCompleted: false,
+        statusColor: const Color(0xffD97706),
+        statusBgColor: const Color(0xFFFFFBEB),
+      ),
+      SurveyModel(
+        title: 'Social Media Usage',
+        status: 'Disqualified',
+        date: 'March 8, 2025',
+        coins: '+0',
+        isCompleted: false,
+        statusColor: const Color(0xffE11D48),
+        statusBgColor: const Color(0xFFFFF1F2),
+      ),
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -25,28 +55,9 @@ class SurveyHistoryScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          Container(
-            margin: EdgeInsets.only(right: 16.w),
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-            decoration: BoxDecoration(
-              // shape: BoxShape.circle,
-              color: const Color(0xFFE0E7FF),
-              borderRadius: BorderRadius.all(Radius.circular(100.r)),
-            ),
-            child: Row(
-              children: [
-                SvgPicture.asset('assets/images/svgs/db.svg'),
-                SizedBox(width: 8.w),
-                Text(
-                  '2450',
-                  style: TextStyle(
-                    color: const Color(0xFF1E1B4B),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.sp,
-                  ),
-                )
-              ],
-            ),
+          Padding(
+            padding: EdgeInsets.only(right: 16.w),
+            child: _CoinsWidget(coins: '2450'),
           ),
         ],
       ),
@@ -62,71 +73,12 @@ class SurveyHistoryScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.sp),
-            child: Column(
-              children: [
-                const SurveyWidget(
-                  title: 'Netflix Survey',
-                  status: 'Completed',
-                  date: 'March 15, 2025',
-                  coins: '+2450',
-                  isCompleted: true,
-                  statusColor: Color(0xFF059669),
-                  statusBgColor: Color(0xFFECFDF5),
-                ),
-                SizedBox(height: 16.h),
-                const SurveyWidget(
-                  title: 'Food Delivery App Survey',
-                  status: 'Pending Review',
-                  date: 'March 10, 2025',
-                  coins: '+400',
-                  isCompleted: false,
-                  statusColor: Color(0xffD97706),
-                  statusBgColor: Color(0xFFFFFBEB),
-                ),
-                SizedBox(height: 16.h),
-                const SurveyWidget(
-                  title: 'Social Media Usage',
-                  status: 'Disqualified',
-                  date: 'March 8, 2025',
-                  coins: '+0',
-                  isCompleted: false,
-                  statusColor: Color(0xffE11D48),
-                  statusBgColor: Color(0xFFFFF1F2),
-                ),
-                const SurveyWidget(
-                  title: 'Netflix Survey',
-                  status: 'Completed',
-                  date: 'March 15, 2025',
-                  coins: '+2450',
-                  isCompleted: true,
-                  statusColor: Color(0xFF059669),
-                  statusBgColor: Color(0xFFECFDF5),
-                ),
-                SizedBox(height: 16.h),
-                const SurveyWidget(
-                  title: 'Food Delivery App Survey',
-                  status: 'Pending Review',
-                  date: 'March 10, 2025',
-                  coins: '+400',
-                  isCompleted: false,
-                  statusColor: Color(0xffD97706),
-                  statusBgColor: Color(0xFFFFFBEB),
-                ),
-                SizedBox(height: 16.h),
-                const SurveyWidget(
-                  title: 'Social Media Usage',
-                  status: 'Disqualified',
-                  date: 'March 8, 2025',
-                  coins: '+0',
-                  isCompleted: false,
-                  statusColor: Color(0xffE11D48),
-                  statusBgColor: Color(0xFFFFF1F2),
-                ),
-              ],
-            ),
+        child: ListView.builder(
+          padding: EdgeInsets.all(16.sp),
+          itemCount: surveyList.length,
+          itemBuilder: (context, index) => Padding(
+            padding: EdgeInsets.only(bottom: 16.h),
+            child: SurveyWidget(survey: surveyList[index]),
           ),
         ),
       ),
@@ -134,9 +86,12 @@ class SurveyHistoryScreen extends StatelessWidget {
   }
 }
 
-class SurveyWidget extends StatelessWidget {
-  const SurveyWidget({
-    super.key,
+class SurveyModel {
+  final String title, status, date, coins;
+  final Color statusColor, statusBgColor;
+  final bool isCompleted;
+
+  SurveyModel({
     required this.title,
     required this.status,
     required this.date,
@@ -145,33 +100,30 @@ class SurveyWidget extends StatelessWidget {
     required this.statusBgColor,
     this.isCompleted = false,
   });
+}
 
-  final String title;
-  final String status;
-  final String date;
-  final String coins;
-  final Color statusColor;
-  final Color statusBgColor;
-  final bool? isCompleted;
+class SurveyWidget extends StatelessWidget {
+  final SurveyModel survey;
+
+  const SurveyWidget({super.key, required this.survey});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
       padding: EdgeInsets.all(16.sp),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.45,
+              Expanded(
                 child: Text(
-                  title,
+                  survey.title,
                   style: TextStyle(
                     color: const Color(0xFF1E1B4B),
                     fontWeight: FontWeight.w600,
@@ -180,22 +132,7 @@ class SurveyWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                decoration: BoxDecoration(
-                  // shape: BoxShape.circle,
-                  color: statusBgColor,
-                  borderRadius: BorderRadius.all(Radius.circular(100.r)),
-                ),
-                child: Text(
-                  status,
-                  style: TextStyle(
-                    color: statusColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
-                  ),
-                ),
-              ),
+              _StatusWidget(survey: survey),
             ],
           ),
           SizedBox(height: 16.h),
@@ -203,18 +140,16 @@ class SurveyWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                date,
+                survey.date,
                 style: TextStyle(
                   color: const Color(0xFF475569),
-                  fontWeight: FontWeight.w400,
                   fontSize: 14.sp,
                 ),
               ),
               Text(
-                '$coins Coins',
+                '${survey.coins} Coins',
                 style: TextStyle(
                   color: const Color(0xFF475569),
-                  fontWeight: FontWeight.w400,
                   fontSize: 14.sp,
                 ),
               ),
@@ -232,23 +167,80 @@ class SurveyWidget extends StatelessWidget {
                   fontSize: 14.sp,
                 ),
               ),
-              isCompleted != true
-                  ? const SizedBox.shrink()
-                  : Row(
-                      children: [
-                        SvgPicture.asset('assets/images/svgs/report_icon.svg'),
-                        SizedBox(width: 4.w),
-                        Text(
-                          'Report Missing Reward',
-                          style: TextStyle(
-                            color: const Color(0xFFE11D48),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                      ],
-                    ),
+              if (survey.isCompleted) _ReportWidget(),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatusWidget extends StatelessWidget {
+  final SurveyModel survey;
+
+  const _StatusWidget({required this.survey});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        color: survey.statusBgColor,
+        borderRadius: BorderRadius.circular(100.r),
+      ),
+      child: Text(
+        survey.status,
+        style: TextStyle(
+          color: survey.statusColor,
+          fontWeight: FontWeight.w500,
+          fontSize: 14.sp,
+        ),
+      ),
+    );
+  }
+}
+
+class _ReportWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SvgPicture.asset('assets/images/svgs/report_icon.svg'),
+        SizedBox(width: 4.w),
+        Text(
+          'Report Missing Reward',
+          style: TextStyle(
+            color: const Color(0xFFE11D48),
+            fontWeight: FontWeight.w500,
+            fontSize: 14.sp,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CoinsWidget extends StatelessWidget {
+  final String coins;
+
+  const _CoinsWidget({required this.coins});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+      decoration: BoxDecoration(
+        color: const Color(0xFFE0E7FF),
+        borderRadius: BorderRadius.circular(100.r),
+      ),
+      child: Row(
+        children: [
+          SvgPicture.asset('assets/images/svgs/db.svg'),
+          SizedBox(width: 8.w),
+          Text(
+            coins,
+            style: TextStyle(color: const Color(0xFF1E1B4B), fontSize: 16.sp),
           ),
         ],
       ),

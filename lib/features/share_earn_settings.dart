@@ -2,74 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ShareEarn extends StatefulWidget {
+class ShareEarn extends StatelessWidget {
   const ShareEarn({super.key});
 
-  @override
-  State<ShareEarn> createState() => _ShareEarnState();
-}
-
-class _ShareEarnState extends State<ShareEarn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFf8fafc),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.transparent,
-        title: Text(
-          "Share & Earn",
-          style: TextStyle(
-            color: const Color(0xFF1E1B4B),
-            fontWeight: FontWeight.w600,
-            fontSize: 20.sp,
-          ),
-        ),
-        actions: [
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 12.w,
-              vertical: 10.h,
-            ),
-            decoration: BoxDecoration(
-              color: const Color(0xFFE0E7FF),
-              borderRadius: BorderRadius.circular(100.r),
-            ),
-            child: Row(
-              children: [
-                SvgPicture.asset(
-                  'assets/images/svgs/wifi_icon.svg',
-                ),
-                Text(
-                  "25GB",
-                  style: TextStyle(
-                    color: const Color(0xFF1E1B4B),
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.sp,
-                  ),
-                )
-              ],
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              "assets/images/svgs/notification_icon.svg",
-            ),
-          )
-        ],
-      ),
+      appBar: _buildAppBar(),
       body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [
-                Color(0xFFEEF2FF),
-                Color(0xFFEEF2FF),
-                Color(0xFFFFFFFF),
-              ],
+              colors: [Color(0xFFEEF2FF), Color(0xFFFFFFFF)],
             ),
           ),
           child: Padding(
@@ -77,11 +24,11 @@ class _ShareEarnState extends State<ShareEarn> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _availableDataCard(),
+                const AvailableDataCard(),
                 SizedBox(height: 16.h),
-                _shareDataOptions(),
+                const ShareDataOptions(),
                 SizedBox(height: 16.h),
-                _topSharers(),
+                const TopSharers(),
               ],
             ),
           ),
@@ -90,111 +37,166 @@ class _ShareEarnState extends State<ShareEarn> {
     );
   }
 
-  Widget _availableDataCard() {
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      surfaceTintColor: Colors.transparent,
+      title: Text(
+        "Share & Earn",
+        style: TextStyle(
+          color: const Color(0xFF1E1B4B),
+          fontWeight: FontWeight.w600,
+          fontSize: 20.sp,
+        ),
+      ),
+      actions: [
+        _buildDataInfo(),
+        IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset("assets/images/svgs/notification_icon.svg"),
+        )
+      ],
+    );
+  }
+
+  Widget _buildDataInfo() {
     return Container(
-      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+      decoration: BoxDecoration(
+        color: const Color(0xFFE0E7FF),
+        borderRadius: BorderRadius.circular(100.r),
+      ),
+      child: Row(
+        children: [
+          SvgPicture.asset('assets/images/svgs/wifi_icon.svg'),
+          SizedBox(width: 4.w),
+          Text(
+            "25GB",
+            style: TextStyle(
+              color: const Color(0xFF1E1B4B),
+              fontWeight: FontWeight.w600,
+              fontSize: 16.sp,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class AvailableDataCard extends StatelessWidget {
+  const AvailableDataCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
       padding: EdgeInsets.all(24.sp),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
-          colors: [
-            Color(0xFF4F46E5),
-            Color(0xFF2563EB),
-          ],
+          colors: [Color(0xFF4F46E5), Color(0xFF2563EB)],
         ),
         borderRadius: BorderRadius.circular(24.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Available Data",
-                        style: TextStyle(
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                    SizedBox(height: 8.h),
-                    Text(
-                      "Share your unused data to earn rewards",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: const Color(0xFFC7D2FE),
-                      ),
-                      overflow: TextOverflow.clip,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(
-                    0.2,
-                  ),
-                  borderRadius: BorderRadius.circular(100.r),
-                ),
-                padding: EdgeInsets.symmetric(
-                  vertical: 20.w,
-                  horizontal: 12.h,
-                ),
-                child: SvgPicture.asset(
-                  "assets/images/svgs/wifi_icon.svg",
-                  color: Colors.white,
-                  width: 30.w,
-                  height: 24.h,
-                ),
-              ),
-            ],
-          ),
+          _buildHeader(),
           SizedBox(height: 16.h),
-          Stack(
-            children: [
-              Container(
-                height: 8.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-              ),
-              Container(
-                height: 8.h,
-                width: MediaQuery.of(context).size.width / 2,
-                decoration: BoxDecoration(
-                  color:  Colors.white,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-              ),
-            ],
-          ),
-
+          _buildProgressBar(context),
           SizedBox(height: 8.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("25GB Available",
-                  style: TextStyle(fontSize: 14.sp, color: Colors.white)),
-              Text(
-                "40GB Total",
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: const Color(0xFFC7D2FE),
-                ),
-              ),
-            ],
-          ),
-
+          _buildDataStats(),
         ],
       ),
     );
   }
 
-  Widget _shareDataOptions() {
+  Widget _buildHeader() {
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Available Data", style: _titleStyle),
+              SizedBox(height: 8.h),
+              Text("Share your unused data to earn rewards", style: _subtitleStyle),
+            ],
+          ),
+        ),
+        CircleAvatar(
+          backgroundColor: Colors.white.withOpacity(0.2),
+          child: SvgPicture.asset(
+            "assets/images/svgs/wifi_icon.svg",
+            color: Colors.white,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildProgressBar(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          height: 8.h,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+        ),
+        Container(
+          height: 8.h,
+          width: MediaQuery.of(context).size.width / 2,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDataStats() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text("25GB Available", style: _subtitleStyle.copyWith(color: Colors.white)),
+        Text("40GB Total", style: _subtitleStyle),
+      ],
+    );
+  }
+
+  TextStyle get _titleStyle => TextStyle(
+    fontSize: 24.sp,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+
+  TextStyle get _subtitleStyle => TextStyle(
+    fontSize: 14.sp,
+    color: const Color(0xFFC7D2FE),
+  );
+}
+
+class ShareDataOptions extends StatelessWidget {
+  const ShareDataOptions({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildCard(
+      "Share Data",
+      "History",
+      [
+        _shareOptionTile("Share 5GB", "Earn 500 points • 24 hours"),
+        _shareOptionTile("Share 10GB", "Earn 1000 points • 24 hours"),
+      ],
+    );
+  }
+
+  Widget _buildCard(String title, String actionText, List<Widget> children) {
     return Container(
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
@@ -206,33 +208,39 @@ class _ShareEarnState extends State<ShareEarn> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Share Data',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E1B4B)
-                ),
-              ),
-              Text(
-                'History',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF4F46E5)
-                ),
-              ),
+              Text(title, style: _boldStyle),
+              Text(actionText, style: _actionStyle),
             ],
           ),
-          SizedBox(height: 30.h),
-          _shareOptionTile("Share 5GB", "Earn 500 points • 24 hours", "Share"),
-          _shareOptionTile("Share 10GB", "Earn 1000 points • 24 hours", "Share"),
+          SizedBox(height: 16.h),
+          ...children,
         ],
       ),
     );
   }
 
-  Widget _topSharers() {
+  Widget _shareOptionTile(String title, String subtitle) {
+    return ListTile(
+      leading: Image.asset('assets/images/pngs/share.png'),
+      title: Text(title, style: _boldStyle),
+      subtitle: Text(subtitle, style: _subtitleStyle),
+      trailing: ElevatedButton(
+        onPressed: () {},
+        child: const Text("Share"),
+      ),
+    );
+  }
+
+  TextStyle get _boldStyle => TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold);
+  TextStyle get _actionStyle => TextStyle(fontSize: 14.sp, color: const Color(0xFF4F46E5));
+  TextStyle get _subtitleStyle => TextStyle(fontSize: 12.sp, color: Colors.black54);
+}
+
+class TopSharers extends StatelessWidget {
+  const TopSharers({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(24.w),
       decoration: BoxDecoration(
@@ -266,53 +274,6 @@ class _ShareEarnState extends State<ShareEarn> {
           fontWeight: FontWeight.bold,
           color: const Color(0xFF4F46E5),
         ),
-      ),
-    );
-  }
-
-  Widget _shareOptionTile(String title, String subtitle, String buttonText) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 12.h),
-      padding: EdgeInsets.all(18.w),
-      decoration: BoxDecoration(
-        color: Color(0xFFEEF2FF),
-        borderRadius: BorderRadius.circular(24.r),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset('assets/images/pngs/share.png'),
-          SizedBox(width: 12.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title,
-                    style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold)),
-                Text(subtitle,
-                    style: TextStyle(fontSize: 12.sp, color: Colors.black54)),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 16.w),
-            decoration: BoxDecoration(
-              color: const Color(0xFF4F46E5),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Center(
-              child: Text(
-                'Share',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
