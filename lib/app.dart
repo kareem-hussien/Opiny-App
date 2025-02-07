@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:opiny_app/core/routing/app_router.dart';
-import 'package:opiny_app/features/bottom_nav_bar/bottom_nav_bar.dart';
-import 'package:opiny_app/features/invite_friends_screen.dart';
-import 'package:opiny_app/features/level1_screen.dart';
-import 'package:opiny_app/features/onboarding/screens/onboarding_screen.dart';
-import 'package:opiny_app/features/survey_history_screen.dart';
+import 'package:opiny_app/features/ahmed/redeem.dart';
+import 'package:opiny_app/features/level_completed.dart';
+import 'package:opiny_app/features/premuim_active.dart';
+import 'package:opiny_app/support_ticket_screen.dart';
+import 'features/data_sharaing_screen.dart';
+import 'features/quiz_first_challenge_screen.dart';
 
 class OpinyApp extends StatelessWidget {
   const OpinyApp({super.key});
@@ -26,8 +27,9 @@ class OpinyApp extends StatelessWidget {
         // initialRoute: OnBoardingScreen.routeName,
         // initialRoute: BottomNavBar.routeName,
         onGenerateRoute: AppRouter.generateRoute,
-        // home:  const InviteFriendsScreen(),
-        home: Level1Screen(),
+        home: SupportTicketsScreen(),
+        // home: Quiz(),
+        // home: SuggestFeatures(),
       ),
     );
   }

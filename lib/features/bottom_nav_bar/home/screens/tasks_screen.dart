@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:opiny_app/core/extensions/navigation_extension.dart';
 import 'package:opiny_app/core/widgets/custom_drawer_widget.dart';
-import 'package:opiny_app/features/bottom_nav_bar/home/screens/notifications_screen.dart';
+import 'package:opiny_app/features/bottom_nav_bar/home/screens/notifications_screen_done.dart';
 
 class TasksScreen extends StatefulWidget {
   const TasksScreen({super.key});
@@ -26,11 +26,12 @@ class _TasksScreenState extends State<TasksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFf8fafc),
+      backgroundColor: Colors.white,
       endDrawer: const CustomDrawerWidget(),
       appBar: AppBar(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.transparent,
+        leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
         title: Text(
           'Daily Tasks',
           style: TextStyle(
@@ -62,167 +63,202 @@ class _TasksScreenState extends State<TasksScreen> {
               ],
             ),
           ),
+          // ,
           IconButton(
             onPressed: () => context.pushNamed(NotificationsScreen.routeName),
-            icon: const Icon(Iconsax.notification, color: Colors.black),
+            icon: SvgPicture.asset('assets/images/svgs/notification_icon.svg'),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16.sp),
-          child: Column(
-            children: [
-              /// Segmented Control
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.r),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: List.generate(segmentTitles.length, (index) {
-                    final isSelected = selectedIndex == index;
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedIndex = index;
-                        });
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 14.w, vertical: 10.h),
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? const Color(0xFF6366F1)
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(50.r),
-                        ),
-                        child: Text(
-                          segmentTitles[index],
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: isSelected
-                                ? Colors.white
-                                : const Color(0xFF1E1B4B),
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
-                ),
-              ),
-              SizedBox(height: 24.h),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.all(16.sp),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            spreadRadius: 0,
-                            blurRadius: 2,
-                            offset: const Offset(
-                                0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                  'assets/images/svgs/done_icon.svg'),
-                              SizedBox(width: 8.w),
-                              Text(
-                                'Completed',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: const Color(0xFF475569),
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 8.h),
-                          Text(
-                            '12/20',
-                            style: TextStyle(
-                              fontSize: 24.sp,
-                              color: const Color(0xFF1E1B4B),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 16.w),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.all(16.sp),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            spreadRadius: 0,
-                            blurRadius: 2,
-                            offset: const Offset(
-                                0, 1), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                  'assets/images/svgs/datab_icon.svg'),
-                              SizedBox(width: 8.w),
-                              Text(
-                                'Today\'s \n Earnings',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: const Color(0xFF475569),
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 8.h),
-                          Text(
-                            '850',
-                            style: TextStyle(
-                              fontSize: 24.sp,
-                              color: const Color(0xFF1E1B4B),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 24.h),
-              const CustomDailyTaskWidget(),
-              SizedBox(height: 16.h),
-              const CustomDailyTaskWidget(),
-              SizedBox(height: 16.h),
-              const CustomDailyTaskWidget(),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color(0xFFEEF2FF),
+              Color(0xFFEEF2FF),
+              Color(0xFFFFFFFF),
             ],
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16.sp),
+            child: Column(
+              children: [
+                /// Segmented Control
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50.r),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(segmentTitles.length, (index) {
+                      final isSelected = selectedIndex == index;
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = index;
+                          });
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 14.w, vertical: 10.h),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? const Color(0xFF6366F1)
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(50.r),
+                          ),
+                          child: Text(
+                            segmentTitles[index],
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: isSelected
+                                  ? Colors.white
+                                  : const Color(0xFF1E1B4B),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+                SizedBox(height: 24.h),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(16.sp),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16.r),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              spreadRadius: 0,
+                              blurRadius: 2,
+                              offset: const Offset(
+                                  0, 1), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                    'assets/images/svgs/done_icon.svg'),
+                                SizedBox(width: 8.w),
+                                Text(
+                                  'Completed',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: const Color(0xFF475569),
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 8.h),
+                            Text(
+                              '12/20',
+                              style: TextStyle(
+                                fontSize: 24.sp,
+                                color: const Color(0xFF1E1B4B),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 16.w),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(16.sp),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16.r),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              spreadRadius: 0,
+                              blurRadius: 2,
+                              offset: const Offset(
+                                  0, 1), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                    'assets/images/svgs/datab_icon.svg'),
+                                SizedBox(width: 8.w),
+                                Text(
+                                  'Today\'s \n Earnings',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: const Color(0xFF475569),
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 8.h),
+                            Text(
+                              '850',
+                              style: TextStyle(
+                                fontSize: 24.sp,
+                                color: const Color(0xFF1E1B4B),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 24.h),
+                const CustomDailyTaskWidget(
+                  iconPath: 'assets/images/svgs/video_icon.png',
+                  title: 'Product Review Video',
+                  description: 'Watch a 30-second product review',
+                  type: 'Easy',
+                  time: '30 sec',
+                  number: '100',
+                ),
+                SizedBox(height: 16.h),
+                const CustomDailyTaskWidget(
+                  iconPath: 'assets/images/svgs/video_icon2.png',
+                  title: 'Netflix User Experience Survey',
+                  description: 'Share your streaming experience',
+                  type: 'Medium',
+                  time: '5 min',
+                  number: '500',
+                ),
+                SizedBox(height: 16.h),
+                const CustomDailyTaskWidget(
+                  iconPath: 'assets/images/svgs/video_icon3.png',
+                  title: 'Mobile Game Testing',
+                  description: 'Test new mobile game features',
+                  type: 'Hard',
+                  time: '15 min',
+                  number: '1000',
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -233,7 +269,15 @@ class _TasksScreenState extends State<TasksScreen> {
 class CustomDailyTaskWidget extends StatelessWidget {
   const CustomDailyTaskWidget({
     super.key,
+    required this.iconPath,
+    required this.title,
+    required this.description,
+    required this.type,
+    required this.time,
+    required this.number,
   });
+
+  final String iconPath, title, description, type, time, number;
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +291,7 @@ class CustomDailyTaskWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset('assets/images/svgs/video_icon.png'),
+              Image.asset(iconPath),
               SizedBox(width: 16.w),
               SizedBox(
                 // width: MediaQuery.of(context).size.width * 0.35,
@@ -255,35 +299,40 @@ class CustomDailyTaskWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SizedBox(
-                          width:
-                              MediaQuery.of(context).size.width * 0.5,
+                          width: MediaQuery.of(context).size.width * 0.46,
                           child: Text(
-                            'Product Review Video',
+                            title,
                             style: TextStyle(
                               fontSize: 16.sp,
                               color: const Color(0xFF0F172A),
                               fontWeight: FontWeight.w500,
                             ),
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.clip,
                           ),
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(
                               vertical: 8.h, horizontal: 8.w),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFDCFCE7),
-                            borderRadius:
-                                BorderRadius.circular(100.r),
+                            color: type == 'Easy'
+                                ? const Color(0xFFDCFCE7)
+                                : type == 'Medium'
+                                    ? const Color(0xFFDBEAFE)
+                                    : const Color(0xFFF3E8FF),
+                            borderRadius: BorderRadius.circular(100.r),
                           ),
                           child: Center(
-                            child: Text('Easy',
+                            child: Text(type,
                                 style: TextStyle(
                                   fontSize: 14.sp,
-                                  color: const Color(0xFF15803D),
+                                  color: type == 'Easy'
+                                      ? const Color(0xFF15803D)
+                                      : type == 'Medium'
+                                          ? const Color(0xFF1D4ED8)
+                                          : const Color(0xFF7E22CE),
                                   fontWeight: FontWeight.w500,
                                 )),
                           ),
@@ -292,7 +341,7 @@ class CustomDailyTaskWidget extends StatelessWidget {
                     ),
                     SizedBox(height: 10.h),
                     Text(
-                      'Watch a 30-second product review',
+                      description,
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: const Color(0xFF64748B),
@@ -322,7 +371,7 @@ class CustomDailyTaskWidget extends StatelessWidget {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        '30 sec',
+                        time,
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: const Color(0xFF475569),
@@ -332,13 +381,12 @@ class CustomDailyTaskWidget extends StatelessWidget {
                     ],
                   ),
                   SizedBox(width: 8.w),
-
                   Row(
                     children: [
                       SvgPicture.asset('assets/images/svgs/db.svg'),
                       SizedBox(width: 8.w),
                       Text(
-                        '100',
+                        number,
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: const Color(0xFF475569),
@@ -350,8 +398,7 @@ class CustomDailyTaskWidget extends StatelessWidget {
                 ],
               ),
               Container(
-                padding: EdgeInsets.symmetric(
-                    vertical: 8.h, horizontal: 14.w),
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 14.w),
                 decoration: BoxDecoration(
                   color: const Color(0xFF7C3AED),
                   borderRadius: BorderRadius.circular(12.r),
@@ -365,8 +412,6 @@ class CustomDailyTaskWidget extends StatelessWidget {
                       )),
                 ),
               ),
-
-
             ],
           ),
         ],

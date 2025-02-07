@@ -8,7 +8,7 @@ class SurveyHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFf8fafc),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.transparent,
@@ -50,41 +50,83 @@ class SurveyHistoryScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16.sp),
-          child: Column(
-            children: [
-              const SurveyWidget(
-                title: 'Netflix Survey',
-                status: 'Completed',
-                date: 'March 15, 2025',
-                coins: '+2450',
-                isCompleted: true,
-                statusColor: Color(0xFF059669),
-                statusBgColor: Color(0xFFECFDF5),
-              ),
-              SizedBox(height: 16.h),
-              const SurveyWidget(
-                title: 'Food Delivery App Survey',
-                status: 'Pending Review',
-                date: 'March 10, 2025',
-                coins: '+400',
-                isCompleted: false,
-                statusColor: Color(0xffD97706),
-                statusBgColor: Color(0xFFFFFBEB),
-              ),
-              SizedBox(height: 16.h),
-              const SurveyWidget(
-                title: 'Social Media Usage',
-                status: 'Disqualified',
-                date: 'March 8, 2025',
-                coins: '+0',
-                isCompleted: false,
-                statusColor: Color(0xffE11D48),
-                statusBgColor: Color(0xFFFFF1F2),
-              ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color(0xFFEEF2FF),
+              Color(0xFFEEF2FF),
+              Color(0xFFFFFFFF),
             ],
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16.sp),
+            child: Column(
+              children: [
+                const SurveyWidget(
+                  title: 'Netflix Survey',
+                  status: 'Completed',
+                  date: 'March 15, 2025',
+                  coins: '+2450',
+                  isCompleted: true,
+                  statusColor: Color(0xFF059669),
+                  statusBgColor: Color(0xFFECFDF5),
+                ),
+                SizedBox(height: 16.h),
+                const SurveyWidget(
+                  title: 'Food Delivery App Survey',
+                  status: 'Pending Review',
+                  date: 'March 10, 2025',
+                  coins: '+400',
+                  isCompleted: false,
+                  statusColor: Color(0xffD97706),
+                  statusBgColor: Color(0xFFFFFBEB),
+                ),
+                SizedBox(height: 16.h),
+                const SurveyWidget(
+                  title: 'Social Media Usage',
+                  status: 'Disqualified',
+                  date: 'March 8, 2025',
+                  coins: '+0',
+                  isCompleted: false,
+                  statusColor: Color(0xffE11D48),
+                  statusBgColor: Color(0xFFFFF1F2),
+                ),
+                const SurveyWidget(
+                  title: 'Netflix Survey',
+                  status: 'Completed',
+                  date: 'March 15, 2025',
+                  coins: '+2450',
+                  isCompleted: true,
+                  statusColor: Color(0xFF059669),
+                  statusBgColor: Color(0xFFECFDF5),
+                ),
+                SizedBox(height: 16.h),
+                const SurveyWidget(
+                  title: 'Food Delivery App Survey',
+                  status: 'Pending Review',
+                  date: 'March 10, 2025',
+                  coins: '+400',
+                  isCompleted: false,
+                  statusColor: Color(0xffD97706),
+                  statusBgColor: Color(0xFFFFFBEB),
+                ),
+                SizedBox(height: 16.h),
+                const SurveyWidget(
+                  title: 'Social Media Usage',
+                  status: 'Disqualified',
+                  date: 'March 8, 2025',
+                  coins: '+0',
+                  isCompleted: false,
+                  statusColor: Color(0xffE11D48),
+                  statusBgColor: Color(0xFFFFF1F2),
+                ),
+              ],
+            ),
           ),
         ),
       ),

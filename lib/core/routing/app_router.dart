@@ -4,7 +4,7 @@ import 'package:opiny_app/features/auth/screens/complete_your_profile_screen.dar
 import 'package:opiny_app/features/auth/screens/login_screen.dart';
 import 'package:opiny_app/features/auth/screens/register_screen.dart';
 import 'package:opiny_app/features/bottom_nav_bar/bottom_nav_bar.dart';
-import 'package:opiny_app/features/bottom_nav_bar/home/screens/notifications_screen.dart';
+import 'package:opiny_app/features/bottom_nav_bar/home/screens/notifications_screen_done.dart';
 import 'package:opiny_app/features/onboarding/screens/choice_screen.dart';
 import 'package:opiny_app/features/onboarding/screens/onboarding_screen.dart';
 

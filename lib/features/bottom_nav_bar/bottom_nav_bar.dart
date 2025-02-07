@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:opiny_app/features/bottom_nav_bar/home/screens/home_screen.dart';
+import 'package:opiny_app/features/bottom_nav_bar/home/screens/home_screen_done.dart';
 import 'package:opiny_app/features/bottom_nav_bar/home/screens/tasks_screen.dart';
 import 'package:opiny_app/features/bottom_nav_bar/profile/screens/profil_screen.dart';
 
@@ -46,53 +46,55 @@ class _BottomNavBarState extends State<BottomNavBar> {
       key: _scaffoldKey, // Assign the GlobalKey
       backgroundColor: const Color(0xFFeff3ff),
       body: tabs[_selectedIndex],
-      endDrawer: Drawer(
-        backgroundColor: Colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              color: const Color(0xFF7C3AED),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'More',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+      endDrawer: SafeArea(
+        child: Drawer(
+          backgroundColor: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Container(
+                padding: const EdgeInsets.all(16.0),
+                color: Colors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'More',
+                      style: TextStyle(
+                        color: Color(0xFF1F2937),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close, color: Colors.white),
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close the drawer
-                    },
-                  ),
-                ],
+                    IconButton(
+                      icon: const Icon(Icons.close, color: Colors.black),
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the drawer
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            // Menu Items
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  _buildDrawerItem(Icons.videogame_asset, 'Games'),
-                  _buildDrawerItem(Icons.quiz, 'Quiz'),
-                  _buildDrawerItem(Icons.bar_chart, 'Surveys'),
-                  _buildDrawerItem(Icons.card_giftcard, 'Offers'),
-                  _buildDrawerItem(Icons.chat, 'Chat'),
-                  _buildDrawerItem(Icons.headset_mic, 'Support'),
-                  _buildDrawerItem(Icons.poll, 'Opinion Polls'),
-                  _buildDrawerItem(Icons.person, 'Profile'),
-                  _buildDrawerItem(Icons.settings, 'Settings'),
-                ],
+              // Menu Items
+              Expanded(
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    _buildDrawerItem(Icons.videogame_asset, 'Games'),
+                    _buildDrawerItem(Icons.quiz, 'Quiz'),
+                    _buildDrawerItem(Icons.bar_chart, 'Surveys'),
+                    _buildDrawerItem(Icons.card_giftcard, 'Offers'),
+                    _buildDrawerItem(Icons.chat, 'Chat'),
+                    _buildDrawerItem(Icons.headset_mic, 'Support'),
+                    _buildDrawerItem(Icons.poll, 'Opinion Polls'),
+                    _buildDrawerItem(Icons.person, 'Profile'),
+                    _buildDrawerItem(Icons.settings, 'Settings'),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Stack(
